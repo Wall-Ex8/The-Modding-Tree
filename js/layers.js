@@ -45,7 +45,8 @@ addLayer("p", {
             description: "Prestige Points boost Point generation.",
             cost: new Decimal(1),
             effect() {
-                return Math.log10(player.points.add(1)).pow(0.75);
+                return player.points.add(1).log10.pow(0.75)
+                
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         }
