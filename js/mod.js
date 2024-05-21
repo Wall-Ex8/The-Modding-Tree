@@ -34,7 +34,8 @@ function getStartPoints(){
 
 // Determines if it should show points/sec
 function canGenPoints(){
-	return true
+	if (hasUpgrade('p', 11)) return true
+	else return false
 }
 
 // Calculate points/sec!
@@ -43,6 +44,7 @@ function getPointGen() {
 		return new Decimal(0)
 
 	let gain = new Decimal(1)
+	if (hasUpgrade('p', 12)) gain = gain.times(upgradeEffect('p', 12))
 	return gain
 }
 

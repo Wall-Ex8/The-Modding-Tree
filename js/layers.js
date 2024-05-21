@@ -24,5 +24,30 @@ addLayer("p", {
     hotkeys: [
         {key: "p", description: "P: Reset for prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return true}
+    layerShown(){return true},
+    upgrades: {
+        11: {
+            title: "Begin",
+            description: "Generate 1 Point every second.",
+            cost: new Decimal(1),
+        },
+        12: {
+            title: "Prestige Boost",
+            description: "Prestige Points boost Point generation.",
+            cost: new Decimal(1),
+            effect() {
+                return player[this.layer].points.add(2).pow(0.5)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+        },
+        13: {
+            title: "Self-Synergy",
+            description: "Prestige Points boost Point generation.",
+            cost: new Decimal(1),
+            effect() {
+                return Math.log10(player.points.add(1)).pow(0.75);
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+        }
+    }
 })
